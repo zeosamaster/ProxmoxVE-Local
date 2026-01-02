@@ -16,9 +16,10 @@ interface ExecutionModeModalProps {
   onExecute: (mode: 'local' | 'ssh', server?: Server, envVars?: EnvVars) => void;
   scriptName: string;
   script?: Script | null;
+  versionType: string;
 }
 
-export function ExecutionModeModal({ isOpen, onClose, onExecute, scriptName, script }: ExecutionModeModalProps) {
+export function ExecutionModeModal({ isOpen, onClose, onExecute, scriptName, script, versionType }: ExecutionModeModalProps) {
   useRegisterModal(isOpen, { id: 'execution-mode-modal', allowEscape: true, onClose });
   const [servers, setServers] = useState<Server[]>([]);
   const [loading, setLoading] = useState(false);
@@ -290,6 +291,7 @@ export function ExecutionModeModal({ isOpen, onClose, onExecute, scriptName, scr
         script={script ?? null}
         server={selectedServer}
         mode={configMode}
+        versionType={versionType}
       />
     </>
   );

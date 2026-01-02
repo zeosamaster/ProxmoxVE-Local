@@ -17,6 +17,7 @@ interface ConfigurationModalProps {
   script: Script | null;
   server: Server | null;
   mode: 'default' | 'advanced';
+  versionType: string
 }
 
 export function ConfigurationModal({
@@ -26,6 +27,7 @@ export function ConfigurationModal({
   script,
   server,
   mode,
+  versionType,
 }: ConfigurationModalProps) {
   useRegisterModal(isOpen, { id: 'configuration-modal', allowEscape: true, onClose });
 
@@ -49,7 +51,9 @@ export function ConfigurationModal({
   );
 
   // Get resources from JSON
-  const resources = actualScript?.install_methods?.[0]?.resources;
+  const resources = actualScript?.install_methods?.find(
+    (method) => method.type === versionType && method.script
+  )?.resources;
   const slug = actualScript?.slug ?? '';
 
   // Default mode state

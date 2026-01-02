@@ -940,6 +940,7 @@ export function ScriptDetailModal({
           isOpen={executionModeOpen}
           onClose={() => setExecutionModeOpen(false)}
           onExecute={handleExecuteScript}
+          versionType={selectedVersionType}
         />
       )}
 
